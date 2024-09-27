@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common'
-import { ConfigModule } from '@nestjs/config'
-import { configuration } from './config/configuration'
+import { APP_GUARD } from '@nestjs/core'
+import { AuthGuard } from './auth/auth.guard'
+import { AuthModule } from './auth/auth.module'
+import { UserModule } from './user/user.module'
+import { CoreModule } from './core/core.module'
 
 @Module({
-    imports: [ConfigModule.forRoot({ load: [configuration] })],
+    imports: [CoreModule, AuthModule, UserModule],
+    providers: [{ provide: APP_GUARD, useClass: AuthGuard }],
     controllers: [],
-    providers: []
+    exports: []
 })
 export class AppModule {}

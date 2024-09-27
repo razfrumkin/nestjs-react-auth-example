@@ -1,3 +1,6 @@
 export const configuration = () => ({
-    port: parseInt(process.env.PORT) || 3000
+    port: parseInt(process.env.PORT) || 3000,
+    jwt: {
+        secret: process.env.JWT_SECRET
+    }
 })
